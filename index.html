@@ -175,9 +175,9 @@
       );
       
       return (
-        <div className="bg-gray-900 text-white min-h-screen pt-24 font-sans">
+        <div className="bg-gray-900 text-white min-h-screen font-sans">
           <Header setCurrentPage={setCurrentPage} />
-          <main className="container mx-auto p-8">
+          <main className="container mx-auto p-8 pt-24"> {/* Added padding-top */}
             <h1 className="text-4xl md:text-5xl font-bold text-center mb-12 text-yellow-400">{data.pageTitle}</h1>
             <section className="mb-16 bg-gray-800 p-8 rounded-lg shadow-lg">
               <h2 className="text-3xl font-semibold mb-4 text-center">{data.mainTitle}</h2>
@@ -251,9 +251,9 @@
       };
     
       return (
-        <div className="bg-gray-900 text-white min-h-screen pt-24 font-sans">
+        <div className="bg-gray-900 text-white min-h-screen font-sans">
           <Header setCurrentPage={setCurrentPage} />
-          <main className="container mx-auto p-8">
+          <main className="container mx-auto p-8 pt-24"> {/* Added padding-top */}
             <h1 className="text-4xl md:text-5xl font-bold text-center mb-12 text-yellow-400">{data.de.pageTitle}</h1>
             <section>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -307,12 +307,12 @@
             {
               id: 1,
               title: "Live-Konzert in Berlin",
-              date: "Samstag, 30. August 2025",
-              time: "20:00 - 00:00 Uhr",
+              date: "Samstag, 28. Juni 2025",
+              time: "21:00 Uhr",
               location: "Hanns-Eisler-Straße 93, 10409 Berlin",
               price: "10 Euro",
               description: "Die Kabouk Band live in Berlin! Seien Sie dabei bei einem unvergesslichen Abend voller kurdischer Musik und Energie. Begrenzte Kapazität: nur 100 Plätze. Kinder unter 12 Jahren haben freien Eintritt.",
-              poster: 'flyer2new.jpg',
+              poster: 'flyer1.jpg',
               isPast: true // این رویداد به عنوان یک رویداد گذشته علامت‌گذاری شده است
             },
             {
@@ -323,7 +323,7 @@
               location: "Hanns-Eisler-Straße 93, 10409 Berlin",
               price: "10 Euro",
               description: "Live-Musik-Abend mit der Kabouk Band und der Kulturmarkthalle Berlin. Verpassen Sie dieses besondere Ereignis nicht!",
-              poster: 'flyer1.jpg',
+              poster: 'flyer2.jpg',
               isPast: true // این رویداد به عنوان یک رویداد گذشته علامت‌گذاری شده است
             },
             {
@@ -351,10 +351,10 @@
             {
               id: 5,
               title: "Live-Konzert in Berlin",
-              date: "Samstag, 12. Juli 2025",
-              time: "21:00 Uhr",
+              date: "Samstag, 30. August 2025",
+              time: "20:00 - 00:00 Uhr",
               location: "Kulturmarkthalle Berlin",
-              price: "15 Euro",
+              price: "10 Euro",
               description: "Ein brandneues Konzert mit der Kabouk Band! Sichern Sie sich jetzt Ihre Tickets für einen unvergesslichen Abend.",
               poster: 'flyer2new.jpg',
               isPast: false
@@ -365,9 +365,9 @@
       };
       
       return (
-        <div className="bg-gray-900 text-white min-h-screen pt-24 font-sans">
+        <div className="bg-gray-900 text-white min-h-screen font-sans">
           <Header setCurrentPage={setCurrentPage} />
-          <main className="container mx-auto p-8">
+          <main className="container mx-auto p-8 pt-24"> {/* Added padding-top */}
             <h1 className="text-4xl md:text-5xl font-bold text-center mb-12 text-yellow-400">{data.de.pageTitle}</h1>
             <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
               {data.de.events.map((event) => (
@@ -449,9 +449,9 @@
       };
     
       return (
-        <div className="bg-gray-900 text-white min-h-screen pt-24 font-sans">
+        <div className="bg-gray-900 text-white min-h-screen font-sans">
           <Header setCurrentPage={setCurrentPage} />
-          <main className="container mx-auto p-8">
+          <main className="container mx-auto p-8 pt-24"> {/* Added padding-top */}
             <h1 className="text-4xl md:text-5xl font-bold text-center mb-12 text-yellow-400">{data.de.pageTitle}</h1>
             <p className="text-lg text-gray-300 text-center mb-8 max-w-2xl mx-auto">{data.de.introText}</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-16">
