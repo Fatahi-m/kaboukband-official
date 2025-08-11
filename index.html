@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kabouk Band</title>
+  
+  <!-- Tailwind CSS from CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Font: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- React and ReactDOM from CDN -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <!-- Babel for JSX compilation -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- Global styles based on the provided globals.css -->
+  <style>
+    body {
+      background: #0a0a0a;
+      color: #ededed;
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 font-sans">
+  <!-- The root element where our React app will be mounted -->
+  <div id="root"></div>
+
+  <!-- The main application script. Everything is self-contained here. -->
+  <script type="text/babel">
+    // All React components are defined within this single script tag.
+    
+    // Using global React object.
+    const { useState } = React;
+
+    // Header component with navigation
+    const Header = ({ setCurrentPage }) => (
+      <header className="fixed w-full z-10 p-4 bg-black bg-opacity-70 text-white shadow-lg backdrop-filter backdrop-blur-lg">
+        <div className="container mx-auto flex justify-between items-center">
+          <button onClick={() => setCurrentPage('home')} className="text-3xl font-extrabold text-yellow-400 tracking-wide">
+            KABOUK
+          </button>
+          <nav>
+            <ul className="flex space-x-6 text-lg">
+              <li><button onClick={() => setCurrentPage('home')} className="hover:text-yellow-400 transition-colors duration-300">Startseite</button></li>
+              <li><button onClick={() => setCurrentPage('about')} className="hover:text-yellow-400 transition-colors duration-300">Über uns</button></li>
+              <li><button onClick={() => setCurrentPage('gallery')} className="hover:text-yellow-400 transition-colors duration-300">Galerie</button></li>
+              <li><button onClick={() => setCurrentPage('events')} className="hover:text-yellow-400 transition-colors duration-300">Veranstaltungen</button></li>
+              <li><button onClick={() => setCurrentPage('contact')} className="hover:text-yellow-400 transition-colors duration-300">Kontakt</button></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+    );
+
+    // Footer component
+    const Footer = () => (
+      <footer className="w-full text-center p-4 bg-black bg-opacity-70 text-gray-400 border-t border-gray-700">
+        <p className="text-sm">
+          &copy; {new Date().getFullYear()} Kabouk Band. Alle Rechte vorbehalten.
+        </p>
+      </footer>
+    );
+    
+    const HomePage = ({ setCurrentPage }) => (
+      <div className="bg-gray-900 text-white min-h-screen font-sans">
+        <Header setCurrentPage={setCurrentPage} />
+        <main className="relative h-screen flex flex-col justify-center items-center text-center px-4"
+              style={{ backgroundImage: 'url(https://placehold.co/1920x1080/000000/FFFFFF?text=Hero+Image)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+          <div className="absolute inset-0 bg-black opacity-60"></div>
+          <div className="relative z-10">
+            <h1 className="text-4xl md:text-6xl font-extrabold text-yellow-400 mb-4 tracking-wider">
+              Kabouk Band
+            </h1>
+            <p className="text-xl md:text-2xl text-gray-200 mb-8">
+              Authentische kurdische Musik aus Berlin
+            </p>
+            <button
+              onClick={() => setCurrentPage('about')}
+              className="px-8 py-4 bg-yellow-400 text-gray-900 font-bold rounded-full text-xl shadow-lg hover:bg-yellow-500 transition-colors duration-300"
+            >
+              Mehr über uns
+            </button>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+
+    const AboutPage = ({ setCurrentPage }) => {
+      const aboutData = {
+        de: {
+          pageTitle: "Über uns",
+          mainTitle: "Die Geschichte der Kabouk Band",
+          mainText: `
+            Die Kabouk Band, eine kurdische Musikgruppe mit Sitz in Berlin, Deutschland, wurde 2018 gegründet. Seitdem widmet sich die Band der Aufgabe, die Schönheit und den Reichtum der kurdischen Musik und Kultur einem Publikum in Berlin und ganz Europa zu präsentieren. Mit jahrelangen Live-Auftritten und Konzerten hat sich die Kabouk Band durch ihre einzigartige Mischung aus traditionellen und modernen Klängen, herzlichen Darbietungen und der starken Verbindung zur kurdischen Gemeinschaft einen Namen gemacht.
+            
+            Die Mission der Band ist es, die Schönheit der kurdischen Musik mit der Welt zu teilen und Menschen durch die universelle Sprache der Musik zu verbinden.
+          `,
+          membersTitle: "Unsere Mitglieder",
+          members: [
+            {
+              name: 'Mukhtar Fatahi',
+              role: 'Sänger',
+              image: 'https://placehold.co/192x192/FFC107/333333?text=Mukhtar',
+              bio: 'Mukhtar Fatahi ist der Leadsänger der Kabouk Band, bekannt für seine kraftvolle Stimme und seine tiefe Verbindung zu den kurdischen Musiktraditionen.',
+              socials: {
+                facebook: 'https://www.facebook.com/share/1GPvaDsxDN/',
+                instagram: 'https://www.instagram.com/muxtar_fatahi/profilecard/?igsh=OGF2MHVoMjZzeng5',
+                tiktok: 'https://www.tiktok.com/@muxtarfatahi?_t=ZN-8xkMGrOIgH0&_r=1',
+              },
+            },
+            {
+              name: 'Farhad Amini',
+              role: 'Keyboard & Gitarre',
+              image: 'https://placehold.co/192x192/FFC107/333333?text=Farhad',
+              bio: 'Farhad Amini bringt mit seinen Fähigkeiten an Keyboard und Gitarre Energie und Vielseitigkeit in die Band. Er ist der Bandleader.',
+              socials: {
+                facebook: 'https://www.facebook.com/share/1CZ78892Yj/',
+                instagram: 'https://www.instagram.com/farhad_amini',
+                tiktok: 'https://www.tiktok.com/@farhad.amini',
+              },
+            },
+            {
+              name: 'Marwan Soufi',
+              role: 'Violine & Oud',
+              image: 'https://placehold.co/192x192/FFC107/333333?text=Marwan',
+              bio: 'Marwan Soufi verleiht der Kabouk Band mit seiner Beherrschung der Violine und Oud eine einzigartige Note und schafft emotionale und unvergessliche Melodien.',
+              socials: {
+                facebook: 'https://www.facebook.com/share/19GoSfwwMG/',
+                instagram: 'https://www.instagram.com/marwan.rwandzi?igsh=c2l4cXlobHduMDdq',
+                tiktok: 'https://www.tiktok.com/@marvan977',
+              },
+            },
+          ],
+        },
+      };
+      const data = aboutData.de;
+
+      const FacebookIcon = () => (
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.909c0-.889.179-1.552 1.519-1.552h2.481v-3.998h-3.294c-3.513 0-4.706 2.008-4.706 4.359v2.641z"/></svg>
+      );
+      const InstagramIcon = () => (
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.204-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.77-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.35 1.185-6.096 4.67-6.205 6.206-.053 1.132-.063 1.49-.063 4.887 0 3.394.01 3.753.063 4.888.109 1.535 1.854 5.022 6.205 6.206 1.28.058 1.687.072 4.947.072 3.259 0 3.668-.014 4.948-.072 4.35-1.185 6.096-4.672 6.205-6.206.053-1.133.062-1.491.062-4.888 0-3.394-.01-3.753-.062-4.888-.11-1.535-1.855-5.021-6.205-6.206-1.28-.058-1.68-.072-4.948-.072zM12 7.387c-2.84 0-5.143 2.302-5.143 5.143s2.303 5.143 5.143 5.143 5.143-2.303 5.143-5.143-2.303-5.143-5.143-5.143zm0 8.446c-1.879 0-3.403-1.524-3.403-3.403s1.524-3.403 3.403-3.403 3.403 1.524 3.403 3.403-1.524 3.403-3.403 3.403zm5.737-11.849c-.58-.579-1.263-.873-2.052-.873s-1.478.294-2.052.873c-.58.579-.874 1.263-.874 2.052 0 .789.294 1.474.874 2.053.574.579 1.264.873 2.052.873s1.478-.294 2.052-.873c.579-.58.873-1.264.873-2.053 0-.789-.293-1.473-.873-2.052z"/></svg>
+      );
+      const TiktokIcon = () => (
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.645c-.179-.028-.363-.05-.552-.05-1.241 0-2.484.5-3.52 1.536-1.035 1.035-1.535 2.28-1.535 3.52 0 .179.022.363.05.552v4.86c0 2.946-2.502 5.347-5.448 5.347s-5.448-2.401-5.448-5.347c0-2.945 2.502-5.347 5.448-5.347.168 0 .341.02.518.043v-2.043c-.177-.023-.35-.043-.518-.043-4.041 0-7.448 3.327-7.448 7.39s3.407 7.39 7.448 7.39c4.04 0 7.448-3.327 7.448-7.39v-4.86c.189-.028.369-.05.552-.05.203 0 .4.02.6.046v-3.996zM13.447 1.493l-1.92 1.83v2.091c.205.02.404.04.604.04 1.229 0 2.457-.48 3.49-1.513 1.035-1.034 1.535-2.28 1.535-3.52 0-.179-.022-.363-.05-.552z"/></svg>
+      );
+      
+      return (
+        <div className="bg-gray-900 text-white min-h-screen pt-24 font-sans">
+          <Header setCurrentPage={setCurrentPage} />
+          <main className="container mx-auto p-8">
+            <h1 className="text-4xl md:text-5xl font-bold text-center mb-12 text-yellow-400">{data.de.pageTitle}</h1>
+            <section className="mb-16 bg-gray-800 p-8 rounded-lg shadow-lg">
+              <h2 className="text-3xl font-semibold mb-4 text-center">{data.de.mainTitle}</h2>
+              <p className="text-lg text-gray-300 leading-relaxed whitespace-pre-line text-justify">{data.de.mainText}</p>
+            </section>
+            <section>
+              <h2 className="text-3xl font-semibold mb-8 border-b-2 border-yellow-400 pb-2 text-center">{data.de.membersTitle}</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+                {data.de.members.map((member) => (
+                  <div key={member.name} className="text-center">
+                    <div className="w-48 h-48 rounded-full mx-auto mb-4 object-cover border-4 border-yellow-400 shadow-xl overflow-hidden">
+                      <img
+                        src={member.image}
+                        alt={member.name}
+                        width={192}
+                        height={192}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <h3 className="text-2xl font-bold text-yellow-400">{member.name}</h3>
+                    <p className="text-xl font-medium text-gray-300 mb-2">{member.role}</p>
+                    <p className="text-md text-gray-400">{member.bio}</p>
+                    <div className="flex justify-center gap-4 mt-4 text-yellow-400">
+                      {member.socials.facebook && (
+                        <a href={member.socials.facebook} target="_blank" rel="noopener noreferrer" aria-label={`Facebook von ${member.name}`} className="hover:text-white transition-colors duration-300">
+                          <FacebookIcon />
+                        </a>
+                      )}
+                      {member.socials.instagram && (
+                        <a href={member.socials.instagram} target="_blank" rel="noopener noreferrer" aria-label={`Instagram von ${member.name}`} className="hover:text-white transition-colors duration-300">
+                          <InstagramIcon />
+                        </a>
+                      )}
+                      {member.socials.tiktok && (
+                        <a href={member.socials.tiktok} target="_blank" rel="noopener noreferrer" aria-label={`TikTok von ${member.name}`} className="hover:text-white transition-colors duration-300">
+                          <TiktokIcon />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </main>
+          <Footer />
+        </div>
+      );
+    };
+
+    const GalleryPage = ({ setCurrentPage }) => {
+      const data = {
+        de: {
+          pageTitle: "Galerie",
+          images: [
+            { id: 1, url: 'https://placehold.co/800x600/FFC107/333333?text=Image+1', alt: 'Kabouk Band bei einem Konzert' },
+            { id: 2, url: 'https://placehold.co/800x600/FFC107/333333?text=Image+2', alt: 'Sänger Mukhtar Fatahi' },
+            { id: 3, url: 'https://placehold.co/800x600/FFC107/333333?text=Image+3', alt: 'Bandmitglieder auf der Bühne' },
+            { id: 4, url: 'https://placehold.co/800x600/FFC107/333333?text=Image+4', alt: 'Gitarrist Farhad Amini' },
+            { id: 5, url: 'https://placehold.co/800x600/FFC107/333333?text=Image+5', alt: 'Nahaufnahme der Band' },
+            { id: 6, url: 'https://placehold.co/800x600/FFC107/333333?text=Image+6', alt: 'Violine Spieler Marwan Soufi' },
+          ],
+        },
+      };
+      const [selectedImage, setSelectedImage] = useState(null);
+    
+      const handleImageClick = (url) => {
+        setSelectedImage(url);
+      };
+    
+      const handleClose = () => {
+        setSelectedImage(null);
+      };
+    
+      return (
+        <div className="bg-gray-900 text-white min-h-screen pt-24 font-sans">
+          <Header setCurrentPage={setCurrentPage} />
+          <main className="container mx-auto p-8">
+            <h1 className="text-4xl md:text-5xl font-bold text-center mb-12 text-yellow-400">{data.de.pageTitle}</h1>
+            <section>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {data.de.images.map((image) => (
+                  <div
+                    key={image.id}
+                    className="relative overflow-hidden rounded-lg shadow-lg cursor-pointer transform hover:scale-105 transition-transform duration-300"
+                    onClick={() => handleImageClick(image.url)}
+                  >
+                    <img
+                      src={image.url}
+                      alt={image.alt}
+                      className="w-full h-auto object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+            </section>
+          </main>
+          {selectedImage && (
+            <div
+              className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-4"
+              onClick={handleClose}
+            >
+              <div className="max-w-4xl max-h-full">
+                <img
+                  src={selectedImage}
+                  alt="Selected image"
+                  className="w-full h-auto object-contain rounded-lg shadow-2xl"
+                />
+              </div>
+              <button
+                onClick={handleClose}
+                className="absolute top-4 right-4 text-white text-3xl font-bold"
+              >
+                &times;
+              </button>
+            </div>
+          )}
+          <Footer />
+        </div>
+      );
+    };
+    
+    const EventsPage = ({ setCurrentPage }) => {
+      const data = {
+        de: {
+          pageTitle: "Veranstaltungen & Konzerte",
+          events: [
+            {
+              id: 1,
+              title: "Live-Konzert in Berlin",
+              date: "Samstag, 28. Juni 2025",
+              time: "21:00 Uhr",
+              location: "Hanns-Eisler-Straße 93, 10409 Berlin",
+              price: "10 Euro",
+              description: "Die Kabouk Band live in Berlin! Seien Sie dabei bei einem unvergesslichen Abend voller kurdischer Musik und Energie. Begrenzte Kapazität: nur 100 Plätze. Kinder unter 12 Jahren haben freien Eintritt.",
+              poster: 'https://placehold.co/800x1100/FFC107/333333?text=Event+Poster+1',
+            },
+            {
+              id: 2,
+              title: "Live-Konzert in Berlin",
+              date: "Freitag, 27. Juni 2025",
+              time: "21:00 - 02:00 Uhr",
+              location: "Hanns-Eisler-Straße 93, 10409 Berlin",
+              price: "10 Euro",
+              description: "Live-Musik-Abend mit der Kabouk Band und der Kulturmarkthalle Berlin. Verpassen Sie dieses besondere Ereignis nicht!",
+              poster: 'https://placehold.co/800x1100/FFC107/333333?text=Event+Poster+2',
+            },
+            {
+              id: 3,
+              title: "Kurdisches Live-Konzert",
+              date: "Samstag, 28. Juni 2025",
+              time: "21:00 Uhr",
+              location: "Kulturmarkthalle Berlin, Hanns-Eisler-Str. 93, 10409 Berlin",
+              price: "10 Euro",
+              description: "Kurdisches Live-Konzert der Kabouk Band. Die Kapazität ist begrenzt, sichern Sie sich jetzt Ihr Ticket!",
+              poster: 'https://placehold.co/800x1100/FFC107/333333?text=Event+Poster+3',
+            },
+            {
+              id: 4,
+              title: "Konzert der Kabouk Band",
+              date: "Samstag, 28. Juni 2025",
+              time: "21:00 Uhr",
+              location: "Kulturmarkthalle Berlin",
+              price: "10 Euro",
+              description: "Die Kabouk Band tritt live auf! Für weitere Infos und Tickets kontaktieren Sie uns auf Telegram.",
+              poster: 'https://placehold.co/800x1100/FFC107/333333?text=Event+Poster+4',
+            },
+          ],
+          telegramBotLink: "https://t.me/kaboukbandbot",
+        },
+      };
+      
+      return (
+        <div className="bg-gray-900 text-white min-h-screen pt-24 font-sans">
+          <Header setCurrentPage={setCurrentPage} />
+          <main className="container mx-auto p-8">
+            <h1 className="text-4xl md:text-5xl font-bold text-center mb-12 text-yellow-400">{data.de.pageTitle}</h1>
+            <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+              {data.de.events.map((event) => (
+                <div key={event.id} className="bg-gray-800 p-6 rounded-lg shadow-lg flex flex-col items-center text-center">
+                  <h2 className="text-2xl font-bold mb-4">{event.title}</h2>
+                  <img
+                    src={event.poster}
+                    alt={`Poster für ${event.title}`}
+                    className="w-full h-auto object-cover rounded-md shadow-md mb-4"
+                  />
+                  <p className="text-lg text-gray-300 mb-2">
+                    <strong>Datum:</strong> {event.date}
+                  </p>
+                  <p className="text-lg text-gray-300 mb-2">
+                    <strong>Uhrzeit:</strong> {event.time}
+                  </p>
+                  <p className="text-lg text-gray-300 mb-2">
+                    <strong>Ort:</strong> {event.location}
+                  </p>
+                  <p className="text-lg text-gray-300 mb-4">
+                    <strong>Eintritt:</strong> {event.price}
+                  </p>
+                  <p className="text-md text-gray-400 mb-4">{event.description}</p>
+                  <a
+                    href={data.de.telegramBotLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-auto px-6 py-3 bg-yellow-400 text-gray-900 font-bold rounded-full text-lg shadow-lg hover:bg-yellow-500 transition-colors duration-300"
+                  >
+                    Tickets über Telegram kaufen
+                  </a>
+                </div>
+              ))}
+            </section>
+          </main>
+          <Footer />
+        </div>
+      );
+    };
+    
+    const ContactPage = ({ setCurrentPage }) => {
+      const data = {
+        de: {
+          pageTitle: "Kontakt",
+          introText: "Wir freuen uns, von Ihnen zu hören! Egal, ob Sie eine Frage haben, eine Buchungsanfrage stellen möchten oder uns einfach nur Ihre Meinung mitteilen möchten, zögern Sie nicht, uns zu kontaktieren.",
+          formTitle: "Senden Sie uns eine Nachricht",
+          contactInfoTitle: "Unsere Kontaktdaten",
+          email: "info@kaboukband.de",
+          phone: "+49 123 4567890",
+          address: "Kabouk Band, Berlin, Deutschland",
+        },
+      };
+      const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        subject: '',
+        message: '',
+      });
+    
+      const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prevData => ({ ...prevData, [name]: value }));
+      };
+    
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('Form submitted!', formData);
+      };
+    
+      return (
+        <div className="bg-gray-900 text-white min-h-screen pt-24 font-sans">
+          <Header setCurrentPage={setCurrentPage} />
+          <main className="container mx-auto p-8">
+            <h1 className="text-4xl md:text-5xl font-bold text-center mb-12 text-yellow-400">{data.de.pageTitle}</h1>
+            <p className="text-lg text-gray-300 text-center mb-8 max-w-2xl mx-auto">{data.de.introText}</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-16">
+              <section className="bg-gray-800 p-8 rounded-lg shadow-lg">
+                <h2 className="text-3xl font-semibold mb-6 border-b-2 border-yellow-400 pb-2">{data.de.formTitle}</h2>
+                <form className="space-y-6" onSubmit={handleSubmit}>
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-300">Name</label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      value={formData.name}
+                      onChange={handleChange}
+                      className="mt-1 block w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:ring-yellow-400 focus:border-yellow-400"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-300">E-Mail</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="mt-1 block w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:ring-yellow-400 focus:border-yellow-400"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="subject" className="block text-sm font-medium text-gray-300">Betreff</label>
+                    <input
+                      type="text"
+                      id="subject"
+                      name="subject"
+                      required
+                      value={formData.subject}
+                      onChange={handleChange}
+                      className="mt-1 block w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:ring-yellow-400 focus:border-yellow-400"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium text-gray-300">Nachricht</label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows={4}
+                      required
+                      value={formData.message}
+                      onChange={handleChange}
+                      className="mt-1 block w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:ring-yellow-400 focus:border-yellow-400"
+                    ></textarea>
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full px-6 py-3 bg-yellow-400 text-gray-900 font-bold rounded-full text-lg shadow-lg hover:bg-yellow-500 transition-colors duration-300"
+                  >
+                    Absenden
+                  </button>
+                </form>
+              </section>
+              <section className="bg-gray-800 p-8 rounded-lg shadow-lg">
+                <h2 className="text-3xl font-semibold mb-6 border-b-2 border-yellow-400 pb-2">{data.de.contactInfoTitle}</h2>
+                <div className="space-y-4 text-lg">
+                  <p>
+                    <strong>E-Mail:</strong> <a href={`mailto:${data.de.email}`} className="text-yellow-400 hover:underline">{data.de.email}</a>
+                  </p>
+                  <p>
+                    <strong>Telefon:</strong> <a href={`tel:${data.de.phone}`} className="text-yellow-400 hover:underline">{data.de.phone}</a>
+                  </p>
+                  <p>
+                    <strong>Adresse:</strong> {data.de.address}
+                  </p>
+                </div>
+              </section>
+            </div>
+          </main>
+          <Footer />
+        </div>
+      );
+    };
+
+    // The main application component that contains all pages and logic.
+    const App = () => {
+      const [currentPage, setCurrentPage] = useState('home');
+
+      // Render the current page based on the state
+      const renderPage = () => {
+        switch (currentPage) {
+          case 'about':
+            return <AboutPage setCurrentPage={setCurrentPage} />;
+          case 'gallery':
+            return <GalleryPage setCurrentPage={setCurrentPage} />;
+          case 'events':
+            return <EventsPage setCurrentPage={setCurrentPage} />;
+          case 'contact':
+            return <ContactPage setCurrentPage={setCurrentPage} />;
+          case 'home':
+          default:
+            return <HomePage setCurrentPage={setCurrentPage} />;
+        }
+      };
+      
+      return (
+        <div className="bg-gray-900 font-sans">
+          {renderPage()}
+        </div>
+      );
+    };
+
+    // This part renders the App component to the DOM.
+    // این قسمت رندر کردن کامپوننت App را به DOM انجام می‌دهد.
+    const rootElement = document.getElementById('root');
+    const root = ReactDOM.createRoot(rootElement);
+    root.render(<App />);
+  </script>
+</body>
+</html>
+
+
