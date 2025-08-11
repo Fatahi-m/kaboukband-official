@@ -36,27 +36,48 @@
     // All React components are defined within this single script tag.
     
     // Using global React object.
-    const { useState } = React;
+    const { useState, useEffect } = React;
 
     // Header component with navigation
-    const Header = ({ setCurrentPage }) => (
-      <header className="fixed w-full z-10 p-4 bg-black bg-opacity-70 text-white shadow-lg backdrop-filter backdrop-blur-lg">
-        <div className="container mx-auto flex justify-between items-center">
-          <button onClick={() => setCurrentPage('home')} className="text-3xl font-extrabold text-yellow-400 tracking-wide">
-            KABOUK
-          </button>
-          <nav>
-            <ul className="flex space-x-6 text-lg">
-              <li><button onClick={() => setCurrentPage('home')} className="hover:text-yellow-400 transition-colors duration-300">Startseite</button></li>
-              <li><button onClick={() => setCurrentPage('about')} className="hover:text-yellow-400 transition-colors duration-300">Über uns</button></li>
-              <li><button onClick={() => setCurrentPage('gallery')} className="hover:text-yellow-400 transition-colors duration-300">Galerie</button></li>
-              <li><button onClick={() => setCurrentPage('events')} className="hover:text-yellow-400 transition-colors duration-300">Veranstaltungen</button></li>
-              <li><button onClick={() => setCurrentPage('contact')} className="hover:text-yellow-400 transition-colors duration-300">Kontakt</button></li>
-            </ul>
-          </nav>
-        </div>
-      </header>
-    );
+    const Header = ({ setCurrentPage }) => {
+      const [isScrolled, setIsScrolled] = useState(false);
+
+      // Handle scroll events to add a class to the header
+      useEffect(() => {
+        const handleScroll = () => {
+          if (window.scrollY > 50) {
+            setIsScrolled(true);
+          } else {
+            setIsScrolled(false);
+          }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        // Clean up the event listener on component unmount
+        return () => {
+          window.removeEventListener('scroll', handleScroll);
+        };
+      }, []);
+
+      return (
+        <header className={`fixed w-full z-10 p-4 transition-all duration-300 ${isScrolled ? 'bg-black bg-opacity-80 shadow-lg backdrop-blur-md' : 'bg-transparent'}`}>
+          <div className="container mx-auto flex justify-between items-center">
+            <button onClick={() => setCurrentPage('home')} className="text-3xl font-extrabold text-yellow-400 tracking-wide">
+              KABOUK
+            </button>
+            <nav>
+              <ul className="flex space-x-6 text-lg">
+                <li><button onClick={() => setCurrentPage('home')} className="hover:text-yellow-400 transition-colors duration-300">Startseite</button></li>
+                <li><button onClick={() => setCurrentPage('about')} className="hover:text-yellow-400 transition-colors duration-300">Über uns</button></li>
+                <li><button onClick={() => setCurrentPage('gallery')} className="hover:text-yellow-400 transition-colors duration-300">Galerie</button></li>
+                <li><button onClick={() => setCurrentPage('events')} className="hover:text-yellow-400 transition-colors duration-300">Veranstaltungen</button></li>
+                <li><button onClick={() => setCurrentPage('contact')} className="hover:text-yellow-400 transition-colors duration-300">Kontakt</button></li>
+              </ul>
+            </nav>
+          </div>
+        </header>
+      );
+    };
 
     // Footer component
     const Footer = () => (
@@ -286,22 +307,24 @@
             {
               id: 1,
               title: "Live-Konzert in Berlin",
-              date: "Samstag, 28. Juni 2025",
-              time: "21:00 Uhr",
-              location: "Hanns-Eisler-Straße 93, 10409 Berlin",
-              price: "10 Euro",
-              description: "Die Kabouk Band live in Berlin! Seien Sie dabei bei einem unvergesslichen Abend voller kurdischer Musik und Energie. Begrenzte Kapazität: nur 100 Plätze. Kinder unter 12 Jahren haben freien Eintritt.",
-              poster: 'flyer2new.jpg',
-            },
-            {
-              id: 2,
-              title: "Live-Konzert in Berlin",
               date: "Samstag, 30. August 2025",
               time: "20:00 - 00:00 Uhr",
               location: "Hanns-Eisler-Straße 93, 10409 Berlin",
               price: "10 Euro",
+              description: "Die Kabouk Band live in Berlin! Seien Sie dabei bei einem unvergesslichen Abend voller kurdischer Musik und Energie. Begrenzte Kapazität: nur 100 Plätze. Kinder unter 12 Jahren haben freien Eintritt.",
+              poster: 'flyer2new.jpg',
+              isPast: true // این رویداد به عنوان یک رویداد گذشته علامت‌گذاری شده است
+            },
+            {
+              id: 2,
+              title: "Live-Konzert in Berlin",
+              date: "Freitag, 27. Juni 2025",
+              time: "21:00 - 02:00 Uhr",
+              location: "Hanns-Eisler-Straße 93, 10409 Berlin",
+              price: "10 Euro",
               description: "Live-Musik-Abend mit der Kabouk Band und der Kulturmarkthalle Berlin. Verpassen Sie dieses besondere Ereignis nicht!",
               poster: 'flyer1.jpg',
+              isPast: true // این رویداد به عنوان یک رویداد گذشته علامت‌گذاری شده است
             },
             {
               id: 3,
@@ -312,6 +335,7 @@
               price: "10 Euro",
               description: "Kurdisches Live-Konzert der Kabouk Band. Die Kapazität ist begrenzt, sichern Sie sich jetzt Ihr Ticket!",
               poster: 'flyer3.jpg',
+              isPast: true // این رویداد به عنوان یک رویداد گذشته علامت‌گذاری شده است
             },
             {
               id: 4,
@@ -322,7 +346,19 @@
               price: "10 Euro",
               description: "Die Kabouk Band tritt live auf! Für weitere Infos und Tickets kontaktieren Sie uns auf Telegram.",
               poster: 'flyer4.jpg',
+              isPast: true // این رویداد به عنوان یک رویداد گذشته علامت‌گذاری شده است
             },
+            {
+              id: 5,
+              title: "Live-Konzert in Berlin",
+              date: "Samstag, 12. Juli 2025",
+              time: "21:00 Uhr",
+              location: "Kulturmarkthalle Berlin",
+              price: "15 Euro",
+              description: "Ein brandneues Konzert mit der Kabouk Band! Sichern Sie sich jetzt Ihre Tickets für einen unvergesslichen Abend.",
+              poster: 'flyer2new.jpg',
+              isPast: false
+            }
           ],
           telegramBotLink: "https://t.me/kaboukbandbot",
         },
@@ -335,7 +371,18 @@
             <h1 className="text-4xl md:text-5xl font-bold text-center mb-12 text-yellow-400">{data.de.pageTitle}</h1>
             <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
               {data.de.events.map((event) => (
-                <div key={event.id} className="bg-gray-800 p-6 rounded-lg shadow-lg flex flex-col items-center text-center">
+                <div
+                  key={event.id}
+                  className={`relative p-6 rounded-lg shadow-lg flex flex-col items-center text-center transition-all duration-300 transform hover:scale-105 ${
+                    event.isPast ? 'bg-gray-700 opacity-60' : 'bg-gray-800'
+                  }`}
+                >
+                  {event.isPast && (
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <div className="absolute w-full h-1 bg-red-500 transform rotate-12"></div>
+                      <p className="text-red-500 text-2xl font-bold transform -rotate-12">ABGELAUFEN</p>
+                    </div>
+                  )}
                   <h2 className="text-2xl font-bold mb-4">{event.title}</h2>
                   <img
                     src={event.poster}
