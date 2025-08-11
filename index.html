@@ -71,7 +71,7 @@
       <div className="bg-gray-900 text-white min-h-screen font-sans">
         <Header setCurrentPage={setCurrentPage} />
         <main className="relative h-screen flex flex-col justify-center items-center text-center px-4"
-              style={{ backgroundImage: 'url(https://placehold.co/1920x1080/000000/FFFFFF?text=Hero+Image)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+              style={{ backgroundImage: 'url(band-bg.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
           <div className="absolute inset-0 bg-black opacity-60"></div>
           <div className="relative z-10">
             <h1 className="text-4xl md:text-6xl font-extrabold text-yellow-400 mb-4 tracking-wider">
@@ -93,6 +93,7 @@
     );
 
     const AboutPage = ({ setCurrentPage }) => {
+      // اطلاعات جدید اعضا و متن اصلی از ورودی کاربر
       const aboutData = {
         de: {
           pageTitle: "Über uns",
@@ -107,7 +108,7 @@
             {
               name: 'Mukhtar Fatahi',
               role: 'Sänger',
-              image: 'https://placehold.co/192x192/FFC107/333333?text=Mukhtar',
+              image: 'mukhtar.jpg',
               bio: 'Mukhtar Fatahi ist der Leadsänger der Kabouk Band, bekannt für seine kraftvolle Stimme und seine tiefe Verbindung zu den kurdischen Musiktraditionen.',
               socials: {
                 facebook: 'https://www.facebook.com/share/1GPvaDsxDN/',
@@ -118,18 +119,18 @@
             {
               name: 'Farhad Amini',
               role: 'Keyboard & Gitarre',
-              image: 'https://placehold.co/192x192/FFC107/333333?text=Farhad',
+              image: 'farhad.jpg',
               bio: 'Farhad Amini bringt mit seinen Fähigkeiten an Keyboard und Gitarre Energie und Vielseitigkeit in die Band. Er ist der Bandleader.',
               socials: {
                 facebook: 'https://www.facebook.com/share/1CZ78892Yj/',
-                instagram: 'https://www.instagram.com/farhad_amini',
+                instagram: 'https://www.instagram.com/farhad_amini_',
                 tiktok: 'https://www.tiktok.com/@farhad.amini',
               },
             },
             {
               name: 'Marwan Soufi',
               role: 'Violine & Oud',
-              image: 'https://placehold.co/192x192/FFC107/333333?text=Marwan',
+              image: 'marwan.jpg',
               bio: 'Marwan Soufi verleiht der Kabouk Band mit seiner Beherrschung der Violine und Oud eine einzigartige Note und schafft emotionale und unvergessliche Melodien.',
               socials: {
                 facebook: 'https://www.facebook.com/share/19GoSfwwMG/',
@@ -156,15 +157,15 @@
         <div className="bg-gray-900 text-white min-h-screen pt-24 font-sans">
           <Header setCurrentPage={setCurrentPage} />
           <main className="container mx-auto p-8">
-            <h1 className="text-4xl md:text-5xl font-bold text-center mb-12 text-yellow-400">{data.de.pageTitle}</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-center mb-12 text-yellow-400">{data.pageTitle}</h1>
             <section className="mb-16 bg-gray-800 p-8 rounded-lg shadow-lg">
-              <h2 className="text-3xl font-semibold mb-4 text-center">{data.de.mainTitle}</h2>
-              <p className="text-lg text-gray-300 leading-relaxed whitespace-pre-line text-justify">{data.de.mainText}</p>
+              <h2 className="text-3xl font-semibold mb-4 text-center">{data.mainTitle}</h2>
+              <p className="text-lg text-gray-300 leading-relaxed whitespace-pre-line text-justify">{data.mainText}</p>
             </section>
             <section>
-              <h2 className="text-3xl font-semibold mb-8 border-b-2 border-yellow-400 pb-2 text-center">{data.de.membersTitle}</h2>
+              <h2 className="text-3xl font-semibold mb-8 border-b-2 border-yellow-400 pb-2 text-center">{data.membersTitle}</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-                {data.de.members.map((member) => (
+                {data.members.map((member) => (
                   <div key={member.name} className="text-center">
                     <div className="w-48 h-48 rounded-full mx-auto mb-4 object-cover border-4 border-yellow-400 shadow-xl overflow-hidden">
                       <img
@@ -209,13 +210,12 @@
       const data = {
         de: {
           pageTitle: "Galerie",
+          // مسیر تصاویر گالری به فایل‌های جدید کاربر تغییر داده شده
           images: [
-            { id: 1, url: 'https://placehold.co/800x600/FFC107/333333?text=Image+1', alt: 'Kabouk Band bei einem Konzert' },
-            { id: 2, url: 'https://placehold.co/800x600/FFC107/333333?text=Image+2', alt: 'Sänger Mukhtar Fatahi' },
-            { id: 3, url: 'https://placehold.co/800x600/FFC107/333333?text=Image+3', alt: 'Bandmitglieder auf der Bühne' },
-            { id: 4, url: 'https://placehold.co/800x600/FFC107/333333?text=Image+4', alt: 'Gitarrist Farhad Amini' },
-            { id: 5, url: 'https://placehold.co/800x600/FFC107/333333?text=Image+5', alt: 'Nahaufnahme der Band' },
-            { id: 6, url: 'https://placehold.co/800x600/FFC107/333333?text=Image+6', alt: 'Violine Spieler Marwan Soufi' },
+            { id: 1, url: 'gallery-image1.jpg', alt: 'Kabouk Band bei einem Konzert' },
+            { id: 2, url: 'gallery-image2.jpg', alt: 'Sänger Mukhtar Fatahi' },
+            { id: 3, url: 'gallery-image3.jpg', alt: 'Bandmitglieder auf der Bühne' },
+            { id: 4, url: 'gallery-image4.jpg', alt: 'Gitarrist Farhad Amini' },
           ],
         },
       };
@@ -281,6 +281,7 @@
       const data = {
         de: {
           pageTitle: "Veranstaltungen & Konzerte",
+          // مسیر پوسترهای رویدادها به فایل‌های جدید کاربر تغییر داده شده
           events: [
             {
               id: 1,
@@ -290,7 +291,7 @@
               location: "Hanns-Eisler-Straße 93, 10409 Berlin",
               price: "10 Euro",
               description: "Die Kabouk Band live in Berlin! Seien Sie dabei bei einem unvergesslichen Abend voller kurdischer Musik und Energie. Begrenzte Kapazität: nur 100 Plätze. Kinder unter 12 Jahren haben freien Eintritt.",
-              poster: 'https://placehold.co/800x1100/FFC107/333333?text=Event+Poster+1',
+              poster: 'flyer1.jpg',
             },
             {
               id: 2,
@@ -300,7 +301,7 @@
               location: "Hanns-Eisler-Straße 93, 10409 Berlin",
               price: "10 Euro",
               description: "Live-Musik-Abend mit der Kabouk Band und der Kulturmarkthalle Berlin. Verpassen Sie dieses besondere Ereignis nicht!",
-              poster: 'https://placehold.co/800x1100/FFC107/333333?text=Event+Poster+2',
+              poster: 'flyer2.jpg',
             },
             {
               id: 3,
@@ -310,7 +311,7 @@
               location: "Kulturmarkthalle Berlin, Hanns-Eisler-Str. 93, 10409 Berlin",
               price: "10 Euro",
               description: "Kurdisches Live-Konzert der Kabouk Band. Die Kapazität ist begrenzt, sichern Sie sich jetzt Ihr Ticket!",
-              poster: 'https://placehold.co/800x1100/FFC107/333333?text=Event+Poster+3',
+              poster: 'flyer3.jpg',
             },
             {
               id: 4,
@@ -320,7 +321,7 @@
               location: "Kulturmarkthalle Berlin",
               price: "10 Euro",
               description: "Die Kabouk Band tritt live auf! Für weitere Infos und Tickets kontaktieren Sie uns auf Telegram.",
-              poster: 'https://placehold.co/800x1100/FFC107/333333?text=Event+Poster+4',
+              poster: 'flyer4.jpg',
             },
           ],
           telegramBotLink: "https://t.me/kaboukbandbot",
@@ -523,5 +524,3 @@
   </script>
 </body>
 </html>
-
-
