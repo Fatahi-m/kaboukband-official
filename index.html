@@ -88,9 +88,15 @@
           </div>
           {/* Mobile menu content */}
           {isMobileMenuOpen && (
-            <div className="md:hidden fixed inset-0 z-10 bg-black bg-opacity-80 backdrop-blur-sm transition-all duration-300 transform translate-x-0">
-              <nav className="absolute top-0 right-0 h-full w-2/3 bg-gray-900 shadow-lg flex flex-col items-center py-8">
-                <ul className="flex flex-col space-y-6 text-lg">
+            <div className="md:hidden fixed inset-0 z-10 bg-black bg-opacity-80 backdrop-blur-sm transition-all duration-300">
+              <nav className="absolute top-0 right-0 h-full w-3/4 bg-gray-900 shadow-lg flex flex-col items-center py-8">
+                <button
+                  onClick={handleMobileMenuToggle}
+                  className="absolute top-4 left-4 text-white text-3xl font-bold"
+                >
+                  &times;
+                </button>
+                <ul className="flex flex-col space-y-6 text-lg mt-12">
                   <li><button onClick={() => { setCurrentPage('home'); setIsMobileMenuOpen(false); }} className="hover:text-yellow-400 transition-colors duration-300">Startseite</button></li>
                   <li><button onClick={() => { setCurrentPage('about'); setIsMobileMenuOpen(false); }} className="hover:text-yellow-400 transition-colors duration-300">Über uns</button></li>
                   <li><button onClick={() => { setCurrentPage('gallery'); setIsMobileMenuOpen(false); }} className="hover:text-yellow-400 transition-colors duration-300">Galerie</button></li>
@@ -117,7 +123,12 @@
       <div className="bg-gray-900 text-white min-h-screen font-sans">
         <Header setCurrentPage={setCurrentPage} />
         <main className="relative h-screen flex flex-col justify-center items-center text-center px-4"
-              style={{ backgroundImage: 'url(band-bg.jpg)', backgroundAttachment: 'fixed', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+              style={{
+                backgroundImage: 'url(band-bg.jpg)',
+                backgroundAttachment: 'fixed',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center'
+              }}>
           <div className="absolute inset-0 bg-black opacity-60"></div>
           <div className="relative z-10">
             <h1 className="text-4xl md:text-6xl font-extrabold text-yellow-400 mb-4 tracking-wider">
@@ -154,7 +165,7 @@
             {
               name: 'Mukhtar Fatahi',
               role: 'Sänger',
-              image: 'mukhtar.jpg',
+              image: 'images/mukhtar.jpg',
               bio: 'Mukhtar Fatahi ist der Leadsänger der Kabouk Band, bekannt für seine kraftvolle Stimme und seine tiefe Verbindung zu den kurdischen Musiktraditionen.',
               socials: {
                 facebook: 'https://www.facebook.com/share/1GPvaDsxDN/',
@@ -165,7 +176,7 @@
             {
               name: 'Farhad Amini',
               role: 'Keyboard & Gitarre',
-              image: 'farhad.jpg',
+              image: 'images/farhad.jpg',
               bio: 'Farhad Amini bringt mit seinen Fähigkeiten an Keyboard und Gitarre Energie und Vielseitigkeit in die Band. Er ist der Bandleader.',
               socials: {
                 facebook: 'https://www.facebook.com/share/1CZ78892Yj/',
@@ -176,7 +187,7 @@
             {
               name: 'Marwan Soufi',
               role: 'Violine & Oud',
-              image: 'marwan.jpg',
+              image: 'images/marwan.jpg',
               bio: 'Marwan Soufi verleiht der Kabouk Band mit seiner Beherrschung der Violine und Oud eine einzigartige Note und schafft emotionale und unvergessliche Melodien.',
               socials: {
                 facebook: 'https://www.facebook.com/share/19GoSfwwMG/',
@@ -392,7 +403,7 @@
       return (
         <div className="bg-gray-900 text-white min-h-screen font-sans">
           <Header setCurrentPage={setCurrentPage} />
-          <main className="container mx-auto p-8 pt-24"> {/* Added padding-top */}
+          <main className="container mx-auto p-8 pt-24">
             <h1 className="text-4xl md:text-5xl font-bold text-center mb-12 text-yellow-400">{data.de.pageTitle}</h1>
             <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
               {data.de.events.map((event) => (
@@ -476,7 +487,7 @@
       return (
         <div className="bg-gray-900 text-white min-h-screen font-sans">
           <Header setCurrentPage={setCurrentPage} />
-          <main className="container mx-auto p-8 pt-24"> {/* Added padding-top */}
+          <main className="container mx-auto p-8 pt-24">
             <h1 className="text-4xl md:text-5xl font-bold text-center mb-12 text-yellow-400">{data.de.pageTitle}</h1>
             <p className="text-lg text-gray-300 text-center mb-8 max-w-2xl mx-auto">{data.de.introText}</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-16">
