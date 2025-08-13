@@ -5,20 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kabouk Band</title>
   
-  <!-- Tailwind CSS from CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Font: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- React and ReactDOM from CDN -->
   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-  <!-- Babel for JSX compilation -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-  <!-- Global styles based on the provided globals.css -->
   <style>
     body {
       background: #0a0a0a;
@@ -40,10 +35,8 @@
   </style>
 </head>
 <body class="bg-gray-900 font-sans">
-  <!-- The root element where our React app will be mounted -->
   <div id="root"></div>
 
-  <!-- The main application script. Everything is self-contained here. -->
   <script type="text/babel">
     // All React components are defined within this single script tag.
     
@@ -99,12 +92,12 @@
               </svg>
             </button>
           </div>
-          {/* Mobile menu content */}
+          {/* Mobile menu content - Updated to match the provided image */}
           {isMobileMenuOpen && (
-            <div className={`md:hidden fixed inset-0 z-40 transform transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-              <nav className="absolute top-0 left-0 h-full w-full bg-gray-900 bg-opacity-80 backdrop-blur-sm shadow-lg flex flex-col p-6">
-                <div className="flex justify-between items-center mb-8">
-                  {/* Close button moved to the top left of the sidebar */}
+            <div className={`md:hidden fixed inset-0 z-40 bg-gray-900 bg-opacity-95 backdrop-blur-sm shadow-lg flex flex-col p-6`}>
+              <nav className="flex-1 flex flex-col items-start space-y-8">
+                {/* Close button and search bar at the top */}
+                <div className="flex items-center w-full mb-8">
                   <button
                     onClick={handleMobileMenuToggle}
                     className="text-white text-3xl font-bold focus:outline-none"
@@ -112,18 +105,21 @@
                     &times;
                   </button>
                   <div className="flex-1 ml-4">
-                      <input type="text" placeholder="Suche..." className="w-full px-4 py-2 bg-gray-800 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"/>
+                    <input type="text" placeholder="Suche..." className="w-full px-4 py-2 bg-gray-800 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"/>
                   </div>
                 </div>
-                <ul className="flex flex-col space-y-4 text-xl">
-                  <li><button onClick={() => { setCurrentPage('home'); setIsMobileMenuOpen(false); }} className="block py-3 px-6 hover:bg-gray-800 transition-colors duration-300">Startseite</button></li>
-                  <li><button onClick={() => { setCurrentPage('about'); setIsMobileMenuOpen(false); }} className="block py-3 px-6 hover:bg-gray-800 transition-colors duration-300">Über uns</button></li>
-                  <li><button onClick={() => { setCurrentPage('gallery'); setIsMobileMenuOpen(false); }} className="block py-3 px-6 hover:bg-gray-800 transition-colors duration-300">Galerie</button></li>
-                  <li><button onClick={() => { setCurrentPage('events'); setIsMobileMenuOpen(false); }} className="block py-3 px-6 hover:bg-gray-800 transition-colors duration-300">Veranstaltungen</button></li>
-                <li><button onClick={() => { setCurrentPage('contact'); setIsMobileMenuOpen(false); }} className="block py-3 px-6 hover:bg-gray-800 transition-colors duration-300">Kontakt</button></li>
+
+                {/* Navigation links */}
+                <ul className="flex flex-col space-y-4 text-xl w-full">
+                  <li><button onClick={() => { setCurrentPage('home'); setIsMobileMenuOpen(false); }} className="block py-3 px-0 w-full text-left border-b border-gray-700 hover:text-yellow-400 transition-colors duration-300">Startseite</button></li>
+                  <li><button onClick={() => { setCurrentPage('about'); setIsMobileMenuOpen(false); }} className="block py-3 px-0 w-full text-left border-b border-gray-700 hover:text-yellow-400 transition-colors duration-300">Über uns</button></li>
+                  <li><button onClick={() => { setCurrentPage('gallery'); setIsMobileMenuOpen(false); }} className="block py-3 px-0 w-full text-left border-b border-gray-700 hover:text-yellow-400 transition-colors duration-300">Galerie</button></li>
+                  <li><button onClick={() => { setCurrentPage('events'); setIsMobileMenuOpen(false); }} className="block py-3 px-0 w-full text-left border-b border-gray-700 hover:text-yellow-400 transition-colors duration-300">Veranstaltungen</button></li>
+                  <li><button onClick={() => { setCurrentPage('contact'); setIsMobileMenuOpen(false); }} className="block py-3 px-0 w-full text-left hover:text-yellow-400 transition-colors duration-300">Kontakt</button></li>
                 </ul>
               </nav>
-          </div>
+            </div>
+          )}
         </header>
       );
     };
@@ -289,15 +285,15 @@
         },
       };
       const [selectedImage, setSelectedImage] = useState(null);
-    
+      
       const handleImageClick = (url) => {
         setSelectedImage(url);
       };
-    
+      
       const handleClose = () => {
         setSelectedImage(null);
       };
-    
+      
       return (
         <div className="bg-gray-900 text-white min-h-screen font-sans">
           <Header setCurrentPage={setCurrentPage} />
@@ -485,17 +481,17 @@
         subject: '',
         message: '',
       });
-    
+      
       const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prevData => ({ ...prevData, [name]: value }));
       };
-    
+      
       const handleSubmit = (e) => {
         e.preventDefault();
         console.log('Form submitted!', formData);
       };
-    
+      
       return (
         <div className="bg-gray-900 text-white min-h-screen font-sans">
           <Header setCurrentPage={setCurrentPage} />
