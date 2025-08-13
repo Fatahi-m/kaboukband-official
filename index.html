@@ -65,7 +65,7 @@
       };
 
       return (
-        <header className={`fixed w-full z-10 p-4 transition-all duration-300 ${isScrolled ? 'bg-black bg-opacity-80 shadow-lg backdrop-blur-md' : 'bg-transparent'}`}>
+        <header className={`fixed w-full z-20 p-4 transition-all duration-300 ${isScrolled ? 'bg-black bg-opacity-80 shadow-lg backdrop-blur-md' : 'bg-transparent'}`}>
           <div className="container mx-auto flex justify-between items-center">
             <button onClick={() => setCurrentPage('home')} className="text-3xl font-extrabold text-yellow-400 tracking-wide">
               KABOUK
@@ -88,15 +88,17 @@
           </div>
           {/* Mobile menu content */}
           {isMobileMenuOpen && (
-            <nav className="md:hidden mt-4">
-              <ul className="flex flex-col space-y-4 text-center">
-                <li><button onClick={() => { setCurrentPage('home'); setIsMobileMenuOpen(false); }} className="hover:text-yellow-400 transition-colors duration-300">Startseite</button></li>
-                <li><button onClick={() => { setCurrentPage('about'); setIsMobileMenuOpen(false); }} className="hover:text-yellow-400 transition-colors duration-300">Über uns</button></li>
-                <li><button onClick={() => { setCurrentPage('gallery'); setIsMobileMenuOpen(false); }} className="hover:text-yellow-400 transition-colors duration-300">Galerie</button></li>
-                <li><button onClick={() => { setCurrentPage('events'); setIsMobileMenuOpen(false); }} className="hover:text-yellow-400 transition-colors duration-300">Veranstaltungen</button></li>
-                <li><button onClick={() => { setCurrentPage('contact'); setIsMobileMenuOpen(false); }} className="hover:text-yellow-400 transition-colors duration-300">Kontakt</button></li>
-              </ul>
-            </nav>
+            <div className="md:hidden fixed inset-0 z-10 bg-black bg-opacity-80 backdrop-blur-sm transition-all duration-300 transform translate-x-0">
+              <nav className="absolute top-0 right-0 h-full w-2/3 bg-gray-900 shadow-lg flex flex-col items-center py-8">
+                <ul className="flex flex-col space-y-6 text-lg">
+                  <li><button onClick={() => { setCurrentPage('home'); setIsMobileMenuOpen(false); }} className="hover:text-yellow-400 transition-colors duration-300">Startseite</button></li>
+                  <li><button onClick={() => { setCurrentPage('about'); setIsMobileMenuOpen(false); }} className="hover:text-yellow-400 transition-colors duration-300">Über uns</button></li>
+                  <li><button onClick={() => { setCurrentPage('gallery'); setIsMobileMenuOpen(false); }} className="hover:text-yellow-400 transition-colors duration-300">Galerie</button></li>
+                  <li><button onClick={() => { setCurrentPage('events'); setIsMobileMenuOpen(false); }} className="hover:text-yellow-400 transition-colors duration-300">Veranstaltungen</button></li>
+                  <li><button onClick={() => { setCurrentPage('contact'); setIsMobileMenuOpen(false); }} className="hover:text-yellow-400 transition-colors duration-300">Kontakt</button></li>
+                </ul>
+              </nav>
+            </div>
           )}
         </header>
       );
@@ -200,7 +202,7 @@
       return (
         <div className="bg-gray-900 text-white min-h-screen font-sans">
           <Header setCurrentPage={setCurrentPage} />
-          <main className="container mx-auto p-8 pt-24"> {/* Added padding-top */}
+          <main className="container mx-auto p-8 pt-24">
             <h1 className="text-4xl md:text-5xl font-bold text-center mb-12 text-yellow-400">{data.pageTitle}</h1>
             <section className="mb-16 bg-gray-800 p-8 rounded-lg shadow-lg">
               <h2 className="text-3xl font-semibold mb-4 text-center">{data.mainTitle}</h2>
@@ -256,10 +258,10 @@
           pageTitle: "Galerie",
           // مسیر تصاویر گالری به فایل‌های جدید کاربر تغییر داده شده
           images: [
-            { id: 1, url: 'gallery-image1.jpg', alt: 'Kabouk Band bei einem Konzert' },
-            { id: 2, url: 'gallery-image2.jpg', alt: 'Sänger Mukhtar Fatahi' },
-            { id: 3, url: 'gallery-image3.jpg', alt: 'Bandmitglieder auf der Bühne' },
-            { id: 4, url: 'gallery-image4.jpg', alt: 'Gitarrist Farhad Amini' },
+            { id: 1, url: 'images/gallery-image1.jpg', alt: 'Kabouk Band bei einem Konzert' },
+            { id: 2, url: 'images/gallery-image2.jpg', alt: 'Sänger Mukhtar Fatahi' },
+            { id: 3, url: 'images/gallery-image3.jpg', alt: 'Bandmitglieder auf der Bühne' },
+            { id: 4, url: 'images/gallery-image4.jpg', alt: 'Gitarrist Farhad Amini' },
           ],
         },
       };
@@ -276,7 +278,7 @@
       return (
         <div className="bg-gray-900 text-white min-h-screen font-sans">
           <Header setCurrentPage={setCurrentPage} />
-          <main className="container mx-auto p-8 pt-24"> {/* Added padding-top */}
+          <main className="container mx-auto p-8 pt-24">
             <h1 className="text-4xl md:text-5xl font-bold text-center mb-12 text-yellow-400">{data.de.pageTitle}</h1>
             <section>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -335,8 +337,8 @@
               location: "Hanns-Eisler-Straße 93, 10409 Berlin",
               price: "10 Euro",
               description: "Die Kabouk Band live in Berlin! Seien Sie dabei bei einem unvergesslichen Abend voller kurdischer Musik und Energie. Begrenzte Kapazität: nur 100 Plätze. Kinder unter 12 Jahren haben freien Eintritt.",
-              poster: 'flyer1.jpg',
-              isPast: true // این رویداد به عنوان یک رویداد گذشته علامت‌گذاری شده است
+              poster: 'images/flyer1.jpg',
+              isPast: true
             },
             {
               id: 2,
@@ -346,8 +348,8 @@
               location: "Hanns-Eisler-Straße 93, 10409 Berlin",
               price: "10 Euro",
               description: "Live-Musik-Abend mit der Kabouk Band und der Kulturmarkthalle Berlin. Verpassen Sie dieses besondere Ereignis nicht!",
-              poster: 'flyer2.jpg',
-              isPast: true // این رویداد به عنوان یک رویداد گذشته علامت‌گذاری شده است
+              poster: 'images/flyer2.jpg',
+              isPast: true
             },
             {
               id: 3,
@@ -357,8 +359,8 @@
               location: "Kulturmarkthalle Berlin, Hanns-Eisler-Str. 93, 10409 Berlin",
               price: "10 Euro",
               description: "Kurdisches Live-Konzert der Kabouk Band. Die Kapazität ist begrenzt, sichern Sie sich jetzt Ihr Ticket!",
-              poster: 'flyer3.jpg',
-              isPast: true // این رویداد به عنوان یک رویداد گذشته علامت‌گذاری شده است
+              poster: 'images/flyer3.jpg',
+              isPast: true
             },
             {
               id: 4,
@@ -368,18 +370,18 @@
               location: "Kulturmarkthalle Berlin",
               price: "10 Euro",
               description: "Die Kabouk Band tritt live auf! Für weitere Infos und Tickets kontaktieren Sie uns auf Telegram.",
-              poster: 'flyer4.jpg',
-              isPast: true // این رویداد به عنوان یک رویداد گذشته علامت‌گذاری شده است
+              poster: 'images/flyer4.jpg',
+              isPast: true
             },
             {
               id: 5,
               title: "Live-Konzert in Berlin",
-              date: "Samstag, 20. August 2025",
-              time: "21:00 Uhr",
+              date: "Samstag, 30. August 2025",
+              time: "20:00 - 00:00 Uhr",
               location: "Kulturmarkthalle Berlin",
               price: "10 Euro",
               description: "Ein brandneues Konzert mit der Kabouk Band! Sichern Sie sich jetzt Ihre Tickets für einen unvergesslichen Abend.",
-              poster: 'flyer2new.jpg',
+              poster: 'images/flyer2new.jpg',
               isPast: false
             }
           ],
