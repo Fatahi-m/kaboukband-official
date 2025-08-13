@@ -19,6 +19,8 @@
       background: #0a0a0a;
       color: #ededed;
       font-family: 'Inter', sans-serif;
+      /* Prevent scrolling when mobile menu is open */
+      overflow: auto;
     }
     .hero-background {
       background-image: url('images/band-bg.jpg');
@@ -30,6 +32,9 @@
       .hero-background {
         background-attachment: scroll;
         background-position: center top; /* Adjusted for better mobile view */
+      }
+      body.mobile-menu-open {
+        overflow: hidden;
       }
     }
   </style>
@@ -48,7 +53,6 @@
       const [isScrolled, setIsScrolled] = useState(false);
       const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-      // Handle scroll events to add a class to the header
       useEffect(() => {
         const handleScroll = () => {
           if (window.scrollY > 50) {
@@ -59,14 +63,26 @@
         };
 
         window.addEventListener('scroll', handleScroll);
-        // Clean up the event listener on component unmount
         return () => {
           window.removeEventListener('scroll', handleScroll);
         };
       }, []);
       
+      useEffect(() => {
+        if (isMobileMenuOpen) {
+          document.body.classList.add('mobile-menu-open');
+        } else {
+          document.body.classList.remove('mobile-menu-open');
+        }
+      }, [isMobileMenuOpen]);
+
       const handleMobileMenuToggle = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
+      };
+      
+      const handleCloseMenuAndNavigate = (page) => {
+        setCurrentPage(page);
+        setIsMobileMenuOpen(false);
       };
 
       return (
@@ -94,7 +110,7 @@
           </div>
           {/* Mobile menu content - Updated to match the provided image */}
           {isMobileMenuOpen && (
-            <div className={`md:hidden fixed inset-0 z-40 bg-gray-900 bg-opacity-95 backdrop-blur-sm shadow-lg flex flex-col p-6`}>
+            <div className="md:hidden fixed inset-0 z-40 bg-gray-900 bg-opacity-95 backdrop-blur-sm shadow-lg flex flex-col p-6 overflow-y-auto">
               <nav className="flex-1 flex flex-col items-start space-y-8">
                 {/* Close button and search bar at the top */}
                 <div className="flex items-center w-full mb-8">
@@ -111,11 +127,11 @@
 
                 {/* Navigation links */}
                 <ul className="flex flex-col space-y-4 text-xl w-full">
-                  <li><button onClick={() => { setCurrentPage('home'); setIsMobileMenuOpen(false); }} className="block py-3 px-0 w-full text-left border-b border-gray-700 hover:text-yellow-400 transition-colors duration-300">Startseite</button></li>
-                  <li><button onClick={() => { setCurrentPage('about'); setIsMobileMenuOpen(false); }} className="block py-3 px-0 w-full text-left border-b border-gray-700 hover:text-yellow-400 transition-colors duration-300">Über uns</button></li>
-                  <li><button onClick={() => { setCurrentPage('gallery'); setIsMobileMenuOpen(false); }} className="block py-3 px-0 w-full text-left border-b border-gray-700 hover:text-yellow-400 transition-colors duration-300">Galerie</button></li>
-                  <li><button onClick={() => { setCurrentPage('events'); setIsMobileMenuOpen(false); }} className="block py-3 px-0 w-full text-left border-b border-gray-700 hover:text-yellow-400 transition-colors duration-300">Veranstaltungen</button></li>
-                  <li><button onClick={() => { setCurrentPage('contact'); setIsMobileMenuOpen(false); }} className="block py-3 px-0 w-full text-left hover:text-yellow-400 transition-colors duration-300">Kontakt</button></li>
+                  <li><button onClick={() => handleCloseMenuAndNavigate('home')} className="block py-3 px-0 w-full text-left border-b border-gray-700 hover:text-yellow-400 transition-colors duration-300">Startseite</button></li>
+                  <li><button onClick={() => handleCloseMenuAndNavigate('about')} className="block py-3 px-0 w-full text-left border-b border-gray-700 hover:text-yellow-400 transition-colors duration-300">Über uns</button></li>
+                  <li><button onClick={() => handleCloseMenuAndNavigate('gallery')} className="block py-3 px-0 w-full text-left border-b border-gray-700 hover:text-yellow-400 transition-colors duration-300">Galerie</button></li>
+                  <li><button onClick={() => handleCloseMenuAndNavigate('events')} className="block py-3 px-0 w-full text-left border-b border-gray-700 hover:text-yellow-400 transition-colors duration-300">Veranstaltungen</button></li>
+                  <li><button onClick={() => handleCloseMenuAndNavigate('contact')} className="block py-3 px-0 w-full text-left hover:text-yellow-400 transition-colors duration-300">Kontakt</button></li>
                 </ul>
               </nav>
             </div>
