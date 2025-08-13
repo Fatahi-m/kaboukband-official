@@ -25,6 +25,18 @@
       color: #ededed;
       font-family: 'Inter', sans-serif;
     }
+    .hero-background {
+      background-image: url('images/band-bg.jpg');
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+    }
+    @media (max-width: 768px) {
+      .hero-background {
+        background-attachment: scroll;
+        background-position: center top; /* Adjusted for better mobile view */
+      }
+    }
   </style>
 </head>
 <body class="bg-gray-900 font-sans">
@@ -70,6 +82,7 @@
             <button onClick={() => setCurrentPage('home')} className="text-3xl font-extrabold text-yellow-400 tracking-wide">
               KABOUK
             </button>
+            {/* Desktop Navigation */}
             <nav className="hidden md:block">
               <ul className="flex space-x-6 text-lg">
                 <li><button onClick={() => setCurrentPage('home')} className="hover:text-yellow-400 transition-colors duration-300">Startseite</button></li>
@@ -80,32 +93,36 @@
               </ul>
             </nav>
             {/* Mobile menu button */}
-            <button onClick={handleMobileMenuToggle} className="md:hidden text-white focus:outline-none">
+            <button onClick={handleMobileMenuToggle} className="md:hidden text-white focus:outline-none z-50">
               <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
               </svg>
             </button>
           </div>
           {/* Mobile menu content */}
-          {isMobileMenuOpen && (
-            <div className="md:hidden fixed inset-0 z-10 bg-black bg-opacity-80 backdrop-blur-sm transition-all duration-300">
-              <nav className="absolute top-0 right-0 h-full w-3/4 bg-gray-900 shadow-lg flex flex-col items-center py-8">
-                <button
-                  onClick={handleMobileMenuToggle}
-                  className="absolute top-4 left-4 text-white text-3xl font-bold"
-                >
-                  &times;
-                </button>
-                <ul className="flex flex-col space-y-6 text-lg mt-12">
-                  <li><button onClick={() => { setCurrentPage('home'); setIsMobileMenuOpen(false); }} className="hover:text-yellow-400 transition-colors duration-300">Startseite</button></li>
-                  <li><button onClick={() => { setCurrentPage('about'); setIsMobileMenuOpen(false); }} className="hover:text-yellow-400 transition-colors duration-300">Über uns</button></li>
-                  <li><button onClick={() => { setCurrentPage('gallery'); setIsMobileMenuOpen(false); }} className="hover:text-yellow-400 transition-colors duration-300">Galerie</button></li>
-                  <li><button onClick={() => { setCurrentPage('events'); setIsMobileMenuOpen(false); }} className="hover:text-yellow-400 transition-colors duration-300">Veranstaltungen</button></li>
-                  <li><button onClick={() => { setCurrentPage('contact'); setIsMobileMenuOpen(false); }} className="hover:text-yellow-400 transition-colors duration-300">Kontakt</button></li>
+          <div className={`md:hidden fixed inset-0 z-40 transform transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+              <nav className="absolute top-0 left-0 h-full w-full bg-gray-900 bg-opacity-80 backdrop-blur-sm shadow-lg flex flex-col p-6">
+                <div className="flex justify-between items-center mb-8">
+                  {/* Close button moved to the top left of the sidebar */}
+                  <button
+                    onClick={handleMobileMenuToggle}
+                    className="text-white text-3xl font-bold focus:outline-none"
+                  >
+                    &times;
+                  </button>
+                  <div className="flex-1 ml-4">
+                      <input type="text" placeholder="Suche..." className="w-full px-4 py-2 bg-gray-800 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"/>
+                  </div>
+                </div>
+                <ul className="flex-1 flex flex-col space-y-4 text-center text-xl mt-12 w-full">
+                  <li><button onClick={() => { setCurrentPage('home'); setIsMobileMenuOpen(false); }} className="block py-3 px-6 hover:bg-gray-800 transition-colors duration-300">Startseite</button></li>
+                  <li><button onClick={() => { setCurrentPage('about'); setIsMobileMenuOpen(false); }} className="block py-3 px-6 hover:bg-gray-800 transition-colors duration-300">Über uns</button></li>
+                  <li><button onClick={() => { setCurrentPage('gallery'); setIsMobileMenuOpen(false); }} className="block py-3 px-6 hover:bg-gray-800 transition-colors duration-300">Galerie</button></li>
+                  <li><button onClick={() => { setCurrentPage('events'); setIsMobileMenuOpen(false); }} className="block py-3 px-6 hover:bg-gray-800 transition-colors duration-300">Veranstaltungen</button></li>
+                <li><button onClick={() => { setCurrentPage('contact'); setIsMobileMenuOpen(false); }} className="block py-3 px-6 hover:bg-gray-800 transition-colors duration-300">Kontakt</button></li>
                 </ul>
               </nav>
-            </div>
-          )}
+          </div>
         </header>
       );
     };
@@ -122,13 +139,7 @@
     const HomePage = ({ setCurrentPage }) => (
       <div className="bg-gray-900 text-white min-h-screen font-sans">
         <Header setCurrentPage={setCurrentPage} />
-        <main className="relative h-screen flex flex-col justify-center items-center text-center px-4"
-              style={{
-                backgroundImage: 'url(band-bg.jpg)',
-                backgroundAttachment: 'fixed',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center'
-              }}>
+        <main className="relative h-screen flex flex-col justify-center items-center text-center px-4 hero-background">
           <div className="absolute inset-0 bg-black opacity-60"></div>
           <div className="relative z-10">
             <h1 className="text-4xl md:text-6xl font-extrabold text-yellow-400 mb-4 tracking-wider">
@@ -388,7 +399,7 @@
               id: 5,
               title: "Live-Konzert in Berlin",
               date: "Samstag, 30. August 2025",
-              time: "20:00 - 00:00 Uhr",
+              time: "20:00 - 00-00 Uhr",
               location: "Kulturmarkthalle Berlin",
               price: "10 Euro",
               description: "Ein brandneues Konzert mit der Kabouk Band! Sichern Sie sich jetzt Ihre Tickets für einen unvergesslichen Abend.",
