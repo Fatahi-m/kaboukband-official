@@ -30,8 +30,12 @@
     }
     @media (max-width: 768px) {
       .hero-background {
+        /* Updated styles for mobile to show the entire background image */
         background-attachment: scroll;
-        background-position: center top; /* Adjusted for better mobile view */
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        min-height: 100vh; /* Ensures the hero section takes up the full viewport height */
       }
       body.mobile-menu-open {
         overflow: hidden;
